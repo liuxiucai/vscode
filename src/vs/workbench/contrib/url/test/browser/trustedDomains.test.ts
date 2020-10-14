@@ -10,10 +10,10 @@ import { URI } from 'vs/base/common/uri';
 import { extractGitHubRemotesFromGitConfig } from 'vs/workbench/contrib/url/browser/trustedDomains';
 
 function linkAllowedByRules(link: string, rules: string[]) {
-	assert.ok(isURLDomainTrusted(URI.parse(link), rules), `Link\n${link}\n should be protected by rules\n${JSON.stringify(rules)}`);
+	assert.ok(isURLDomainTrusted(URI.parse(link), rules), `Link\n${link}\n should be allowed by rules\n${JSON.stringify(rules)}`);
 }
 function linkNotAllowedByRules(link: string, rules: string[]) {
-	assert.ok(!isURLDomainTrusted(URI.parse(link), rules), `Link\n${link}\n should NOT be protected by rules\n${JSON.stringify(rules)}`);
+	assert.ok(!isURLDomainTrusted(URI.parse(link), rules), `Link\n${link}\n should NOT be allowed by rules\n${JSON.stringify(rules)}`);
 }
 
 suite('GitHub remote extraction', () => {
@@ -38,7 +38,7 @@ suite('GitHub remote extraction', () => {
 	});
 });
 
-suite('Link protection domain matching', () => {
+suite.only('Link protection domain matching', () => {
 	test('simple', () => {
 		linkNotAllowedByRules('https://x.org', []);
 
